@@ -1,0 +1,30 @@
+package com.invoice.system.shuzuservice;
+
+import com.invoice.common.utils.StringUtils;
+import com.invoice.system.domain.szmodel.SysInvoice;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@Service
+public class QytApiService {
+    @Autowired
+    private CommunalService communalService;
+    //调用数族发票请求地址
+    private static final String  qytUrl = "http://api.crm.hky.qyt.com/";
+
+    /**
+     * 推送发票到qyt
+     * @param sysInvoice
+     */
+    public void pushInvoice(SysInvoice sysInvoice) {
+        Map<String, String> paramMap = new HashMap<String, String>();
+        paramMap.put("orderNo", StringUtils.valueOf(sysInvoice.getInvoiceNumber()) );// qyt发票订单号
+        paramMap.put("billUrl", StringUtils.valueOf(sysInvoice.getUrl()));// 下载地址
+        paramMap.put("status", "");// 代理商ID
+        String url=qytUrl+"time_task/bill_receive";
+        communalService.qytPostRequest(paramMap,url,100);
+    }
+}

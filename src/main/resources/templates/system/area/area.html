@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('地区列表')" />
+    <th:block th:include="include :: select2-css" />
+</head>
+<body class="gray-bg">
+<div class="container-div">
+    <div class="row">
+        <div class="col-sm-12 search-collapse">
+
+            <form id="data-form">
+                <div class="select-list">
+                    <ul>
+                        <li>
+                            地区名称：<input type="text" name="area"/>
+                        </li>
+                        <li>
+                            地区id：<input type="text" name="areaId"/>
+                        </li>
+                        <li>
+                            地区等级：<select name="level" th:with="type=${@dict.getType('level')}">
+                            <option value="">所有</option>
+                            <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                        </select>
+                        </li>
+                        <li>
+                            父id：<input type="text" name="parentId"/>
+                        </li>
+
+                        <li>
+                            <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+
+        <div class="btn-group-sm" id="toolbar" role="group">
+        </div>
+
+        <div class="col-sm-12 select-table table-striped">
+            <table id="bootstrap-table"></table>
+        </div>
+    </div>
+</div>
+<th:block th:include="include :: footer" />
+<th:block th:include="include :: select2-js" />
+<script th:inline="javascript">
+    var prefix = ctx + "system/area";
+
+    $(function() {
+        var options = {
+            url: prefix + "/list",
+            modalName: "数据",
+            columns: [{
+                checkbox: true
+            },
+                {
+                    field: 'areaId',
+                    title: '地区ID'
+                },
+                {
+                    field: 'area',
+                    title: '地区名称',
+                    sortable: true
+                },
+                {
+                    field: 'parentId',
+                    title: '父ID'
+                },
+                {
+                    field: 'level',
+                    title: '地区等级'
+                },
+                {
+                    field: 'isLeaf',
+                    title: '标识',
+                    visible: false
+                },
+                {
+                    field: 'simple',
+                    title: '地区简称'
+                }]
+        };
+        $.table.init(options);
+    });
+</script>
+</body>
+
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+	<th:block th:include="include :: header('商户详情')" />
+</head>
+<body class="white-bg">
+	<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+		<form class="form-horizontal m" id="form-user-edit">
+			<div class="form-group">
+				<label class="col-sm-3 control-label">商户商ID：</label>
+				<div class="form-control-static" th:text="${clientInfo.channelId}"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">机身编号：</label>
+				<div class="form-control-static" th:text="${clientInfo.jsbh}"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">商户名称：</label>
+				<div class="form-control-static" th:text="${clientInfo.clientName}"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">纳税人识别号：</label>
+				<div class="form-control-static" th:text="${clientInfo.nsrsbh}"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">省份：</label>
+				<div class="form-control-static" th:text="${clientInfo.provincename}"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">市：</label>
+				<div class="form-control-static" th:text="${clientInfo.cityname}"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">是否按地址分派给子服务商：</label>
+				<div class="form-control-static" th:if="${clientInfo.dispatch=='1'}">是</div>
+				<div class="form-control-static" th:if="${clientInfo.dispatch!='1'}">否</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">注册地址：</label>
+				<div class="form-control-static" th:text="${clientInfo.businessAddress}"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">电话：</label>
+				<div class="form-control-static" th:text="${clientInfo.tel}"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">开户银行：</label>
+				<div class="form-control-static" th:text="${clientInfo.openBank}"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">银行账号：</label>
+				<div class="form-control-static" th:text="${clientInfo.accountNo}"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">联系人手机号：</label>
+				<div class="form-control-static" th:text="${clientInfo.phone}"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">联系人：</label>
+				<div class="form-control-static" th:text="${clientInfo.contact}"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">联系人身份证：</label>
+				<div class="form-control-static" th:text="${clientInfo.idno}"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">业务员手机号：</label>
+				<div class="form-control-static" th:text="${clientInfo.salerMobile}"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">商品编码：</label>
+				<div class="form-control-static" th:text="${clientInfo.goodsId}"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">税率：</label>
+				<div class="form-control-static" th:text="${clientInfo.taxRate}"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">默认商品名称：</label>
+				<div class="form-control-static" th:text="${clientInfo.defautGoods}"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">项目名称：</label>
+				<div class="form-control-static" th:text="${clientInfo.xmmc}"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">开票人：</label>
+				<div class="form-control-static" th:text="${clientInfo.kpr}"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">设备编号：</label>
+				<div class="form-control-static" th:text="${clientInfo.sbbh}"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">核心板编号：</label>
+				<div class="form-control-static" th:text="${clientInfo.hxbbh}"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">开通状态：</label>
+				<div class="form-control-static" th:if="${clientInfo.ktzt==''}"></div>
+				<div class="form-control-static" th:if="${clientInfo.ktzt=='1'}">开通中</div>
+				<div class="form-control-static" th:if="${clientInfo.ktzt=='2'}">已开通</div>
+				<div class="form-control-static" th:if="${clientInfo.ktzt=='3'}">已关闭</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">商户ID：</label>
+				<div class="form-control-static" th:text="${clientInfo.merchantid}"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">电子签章状态：</label>
+				<div class="form-control-static" th:if="${clientInfo.eSignet=='0'}">等待审核</div>
+				<div class="form-control-static" th:if="${clientInfo.eSignet=='1'}">审核通过</div>
+				<div class="form-control-static" th:if="${clientInfo.eSignet=='2'}">驳回</div>
+				<div class="form-control-static" th:if="${clientInfo.eSignet=='99'}">未申请</div>
+				<div class="form-control-static" th:if="${clientInfo.eSignet=='' || clientInfo.eSignet==null}"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">返回结果：</label>
+				<div class="form-control-static" th:if="${clientInfo.rtnCode=='0'}">成功</div>
+				<div class="form-control-static" th:if="${clientInfo.rtnCode!='0'}">失败</div>
+			</div>
+			<div class="form-group" th:if="${clientInfo.rtnCode!='0'}">
+				<label class="col-sm-3 control-label">失败原因：</label>
+				<div class="form-control-static" th:text="${clientInfo.rtnMsg}"></div>
+			</div>
+		</form>
+	</div>
+	<th:block th:include="include :: footer" />
+	<script type="text/javascript">
+	</script>
+</body>
+</html>

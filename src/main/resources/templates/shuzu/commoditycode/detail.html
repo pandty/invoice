@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+	<th:block th:include="include :: header('商品编码详情')" />
+</head>
+<body class="white-bg">
+	<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+		<form class="form-horizontal m" id="form-commoditycode-data">
+			<div class="form-group">
+				<label class="col-sm-3 control-label">机身编号：</label>
+				<div class="form-control-static" th:text="${sysCommodityCode.jsbh}"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">商户名称：</label>
+				<div class="form-control-static" th:text="${sysCommodityCode.spmc}"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">纳税人识别号：</label>
+				<div class="form-control-static" th:text="${sysCommodityCode.nsrsbh}"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">编码：</label>
+				<div class="form-control-static" th:text="${sysCommodityCode.bm}"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">商品编码：</label>
+				<div class="form-control-static" th:text="${sysCommodityCode.spbm}"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">商品编码简称：</label>
+				<div class="form-control-static" th:text="${sysCommodityCode.spbmjc}"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">规格型号：</label>
+				<div class="form-control-static" th:text="${sysCommodityCode.ggxh}"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">税率：</label>
+				<div class="form-control-static" th:text="${sysCommodityCode.sl}"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">单价：</label>
+				<div class="form-control-static" th:text="${sysCommodityCode.dj}"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">可用税率：</label>
+				<div class="form-control-static" th:text="${sysCommodityCode.kysl}"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">含税标志：</label>
+				<div class="form-control-static" th:text="${sysCommodityCode.hsbz}"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">零税率标识：</label>
+				<div class="form-control-static" th:text="${sysCommodityCode.lslbs}"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">增值税特殊管理：</label>
+				<div class="form-control-static" th:text="${sysCommodityCode.zzstsgl}"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">优惠政策标识：</label>
+				<div class="form-control-static" th:text="${sysCommodityCode.yhzcbs}"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">海关品目：</label>
+				<div class="form-control-static" th:text="${sysCommodityCode.hgjcksppm}"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">商品编码的上级节点：</label>
+				<div class="form-control-static" th:text="${sysCommodityCode.pid}"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">计量单位：</label>
+				<div class="form-control-static" th:text="${sysCommodityCode.jldw}"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">自行编码：</label>
+				<div class="form-control-static" th:text="${sysCommodityCode.zxbm}"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">插入时间：</label>
+				<div class="form-control-static" th:text="${#dates.format(sysCommodityCode.insertTime, 'yyyy-MM-dd HH:mm')}"></div>
+			</div>
+		</form>
+	</div>
+	<th:block th:include="include :: footer" />
+	<script type="text/javascript">
+	</script>
+</body>
+</html>

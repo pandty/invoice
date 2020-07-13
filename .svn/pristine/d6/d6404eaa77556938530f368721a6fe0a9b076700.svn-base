@@ -1,0 +1,11 @@
+package com.invoice.system.mapper;
+
+import com.invoice.system.domain.szmodel.SysPushInfo;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface SysPushInfoMapper {
+
+    int insert(SysPushInfo szPushInfo);
+    int update(SysPushInfo szPushInfo);
+}

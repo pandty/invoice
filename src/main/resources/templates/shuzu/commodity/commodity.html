@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('商品编码管理')" />
+    <th:block th:include="include :: select2-css" />
+</head>
+<body class="gray-bg">
+<div class="container-div">
+    <div class="row">
+        <div class="col-sm-12 search-collapse">
+
+            <form id="data-form">
+                <div class="select-list">
+                    <ul>
+                        <li>
+                            版本号：<input type="text" name="bbh"/>
+                        </li>
+                        <li>
+                            商品名称：<input type="text" name="spmc"/>
+                        </li>
+                        <li>
+                            商品编码：<input type="text" name="spbm"/>
+                        </li>
+                        <li>
+                            版本：<input type="text" name="bb"/>
+                        </li>
+                        <li>
+                            商品编码的上级节点：<input type="text" name="pid"/>
+                        </li>
+
+                        <li>
+                            <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+
+        <div class="btn-group-sm" id="toolbar" role="group">
+            <a class="btn btn-danger" onclick="getCommodity()" shiro:hasPermission="system:dict:remove">
+                <i class="fa fa-refresh"></i> 批量添加
+            </a>
+        </div>
+
+        <div class="col-sm-12 select-table table-striped">
+            <table id="bootstrap-table"></table>
+        </div>
+    </div>
+</div>
+<th:block th:include="include :: footer" />
+<th:block th:include="include :: select2-js" />
+<script th:inline="javascript">
+    var prefix = ctx + "shuzu/commodity";
+
+    $(function() {
+        var options = {
+            url: prefix + "/list",
+            modalName: "数据",
+            columns: [{
+                checkbox: true
+            },
+                {field: 'bbh',title: '版本号'},
+                {field: 'business',title: '标识'},
+                {field: 'qysj',title: '启用时间',formatter: function(value, row, index) {return $.table.tooltip(value,8);} },
+                {field: 'gdqjzsj',title: '过渡期截止时间',formatter: function(value, row, index) {return $.table.tooltip(value,8);}},
+                {field: 'bb', title: '版本'},
+                {field: 'spbm',title: '商品编码',formatter: function(value, row, index) {return $.table.tooltip(value,5);}},
+                {field: 'spmc',title: '商品名称',formatter: function(value, row, index) {return $.table.tooltip(value,2);}},
+                {field: 'spbmjc',title: '货物',formatter: function(value, row, index) {return $.table.tooltip(value,2);}},
+                {field: 'sm',title: ' 说明 ',formatter: function(value, row, index) {return $.table.tooltip(value,1);} },
+                {field: 'zzssl',title: '增值税税率'},
+                {field: 'gjz', title: '关键字',formatter: function(value, row, index) {return $.table.tooltip(value,2);}},
+
+                {field: 'kyzt',title: '可用状态'},
+                {field: 'zzstsgl',title: '增值税特殊管理',formatter: function(value, row, index) {return $.table.tooltip(value,4);}},
+                {field: 'zzszcyj',title: '增值税政策依据' ,formatter: function(value, row, index) {return $.table.tooltip(value,4);}},
+                {field: 'zzstsnrdn',title: '增值税特殊管理代码',formatter: function(value, row, index) {return $.table.tooltip(value,4);}},
+                {field: 'xfsgl', title: '消费税特殊管理',formatter: function(value, row, index) {return $.table.tooltip(value,4);}},
+                {field: 'xfszcyj',title: '消费税政策依据',formatter: function(value, row, index) {return $.table.tooltip(value,4);}},
+                {field: 'xfstsnrdm',title: '消费税政策依据代码',formatter: function(value, row, index) {return $.table.tooltip(value,4);}},
+                {field: 'tjjbm',title: '统计编码',formatter: function(value, row, index) {return $.table.tooltip(value,3);}},
+                {field: 'hgjcksppm',title: '海关品目',formatter: function(value, row, index) {return $.table.tooltip(value,3);} },
+                {field: 'pid',title: '商品编码的上级节点',formatter: function(value, row, index) {return $.table.tooltip(value,8);}},
+                {field: 'hzx',title: '汇总项',formatter: function(value, row, index) {return $.table.tooltip(value,2);}},
+                {
+                    title:'操作',align: 'center',formatter:function (value, row, index) {
+                        var html = ' <a class="btn btn-success" style="text-align: center" onclick="showDetail('+row.id+')" shiro:hasPermission="shuzu:commoditycode:detail">\n' + '查看详情</a>';
+                        return html;
+                    }
+                }
+                ]
+        };
+        $.table.init(options);
+        $.table.hideColumn('qysj');
+        $.table.hideColumn('gdqjzsj');
+        $.table.hideColumn('business');
+        $.table.hideColumn('spbmjc');
+        $.table.hideColumn('sm');
+        $.table.hideColumn('gjz');
+        $.table.hideColumn('zzstsgl');
+        $.table.hideColumn('zzszcyj');
+        $.table.hideColumn('hgjcksppm');
+        $.table.hideColumn('xfsgl');
+        $.table.hideColumn('xfszcyj');
+        $.table.hideColumn('xfstsnrdm');
+        $.table.hideColumn('zzstsnrdn');
+        $.table.hideColumn('tjjbm');
+
+
+    });
+    /*字典列表-详细*/
+    function detail(id) {
+        var url = prefix + '/detail/' + id;
+        $.modal.openTab("字典数据", url);
+    }
+    /** 清理参数缓存 */
+    function getCommodity() {
+        $.operate.get(prefix + "/getCommodity");
+    }
+</script>
+</body>
+
+</html>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.invoice.system.mapper.SysIssueInvoiceDetailsMapper" >
+    <resultMap id="BaseResultMap" type="com.invoice.system.domain.szmodel.SysIssueInvoiceDetails" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="fpqqlsh" property="fpqqlsh" jdbcType="VARCHAR" />
+        <result column="fphxz" property="fphxz" jdbcType="INTEGER" />
+        <result column="spmc" property="spmc" jdbcType="VARCHAR" />
+        <result column="ggxh" property="ggxh" jdbcType="VARCHAR" />
+        <result column="dw" property="dw" jdbcType="VARCHAR" />
+        <result column="spsl" property="spsl" jdbcType="DOUBLE" />
+        <result column="dj" property="dj" jdbcType="DOUBLE" />
+        <result column="je" property="je" jdbcType="DOUBLE" />
+        <result column="sl" property="sl" jdbcType="DOUBLE" />
+        <result column="se" property="se" jdbcType="DOUBLE" />
+        <result column="spbm" property="spbm" jdbcType="VARCHAR" />
+        <result column="zxbm" property="zxbm" jdbcType="VARCHAR" />
+        <result column="yhzcbs" property="yhzcbs" jdbcType="INTEGER" />
+        <result column="lslbs" property="lslbs" jdbcType="INTEGER" />
+        <result column="zzstsgl" property="zzstsgl" jdbcType="VARCHAR" />
+        <result column="insert_time" property="insertTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+    <select id="selectList" parameterType="com.invoice.system.domain.szmodel.SysIssueInvoiceDetails" resultMap="BaseResultMap">
+        select * from sys_issue_invoice_details
+        <where>
+            <if test="bbh != null and bbh != ''">
+                AND bbh = #{bbh}
+            </if>
+            <if test="spmc != null and spmc != ''">
+                AND spmc like concat('%', #{spmc}, '%')
+            </if>
+            <if test="spbm != null and spbm != ''">
+                AND spbm = #{spbm}
+            </if>
+            <if test="bb != null and bb != ''">
+                AND bb = #{bb}
+            </if>
+            <if test="pid != null and pid != ''">
+                AND pid = #{pid}
+            </if>
+        </where>
+    </select>
+    <insert id="insert" parameterType="com.invoice.system.domain.szmodel.SysIssueInvoiceDetails" >
+        insert into sys_issue_invoice_details ( fpqqlsh, fphxz,
+            spmc, ggxh, dw, spsl,
+            dj, je, sl, se,
+            spbm, zxbm, yhzcbs,
+            lslbs, zzstsgl, insert_time
+            )
+        values ( #{fpqqlsh,jdbcType=VARCHAR}, #{fphxz,jdbcType=INTEGER},
+            #{spmc,jdbcType=VARCHAR}, #{ggxh,jdbcType=VARCHAR}, #{dw,jdbcType=VARCHAR}, #{spsl,jdbcType=DOUBLE},
+            #{dj,jdbcType=DOUBLE}, #{je,jdbcType=DOUBLE}, #{sl,jdbcType=DOUBLE}, #{se,jdbcType=DOUBLE},
+            #{spbm,jdbcType=VARCHAR}, #{zxbm,jdbcType=VARCHAR}, #{yhzcbs,jdbcType=INTEGER},
+            #{lslbs,jdbcType=INTEGER}, #{zzstsgl,jdbcType=VARCHAR}, sysdate()
+            )
+    </insert>
+
+    <insert id ="insertList" parameterType="java.util.List" >
+        insert into sys_issue_invoice_details (fpqqlsh, fphxz,
+        spmc, ggxh, dw, spsl,dj, je, sl, se,spbm, zxbm, yhzcbs,
+        lslbs, zzstsgl, insert_time)
+        values
+        <foreach collection ="list" item="szIssueInvoiceDetails" index= "index" separator =",">
+            ( #{szIssueInvoiceDetails.fpqqlsh,jdbcType=VARCHAR}, #{szIssueInvoiceDetails.fphxz,jdbcType=INTEGER},
+            #{szIssueInvoiceDetails.spmc,jdbcType=VARCHAR}, #{szIssueInvoiceDetails.ggxh,jdbcType=VARCHAR}, #{szIssueInvoiceDetails.dw,jdbcType=VARCHAR}, #{szIssueInvoiceDetails.spsl,jdbcType=DOUBLE},
+            #{szIssueInvoiceDetails.dj,jdbcType=DOUBLE}, #{szIssueInvoiceDetails.je,jdbcType=DOUBLE}, #{szIssueInvoiceDetails.sl,jdbcType=DOUBLE}, #{szIssueInvoiceDetails.se,jdbcType=DOUBLE},
+            #{szIssueInvoiceDetails.spbm,jdbcType=VARCHAR}, #{szIssueInvoiceDetails.zxbm,jdbcType=VARCHAR}, #{szIssueInvoiceDetails.yhzcbs,jdbcType=INTEGER},
+            #{szIssueInvoiceDetails.lslbs,jdbcType=INTEGER}, #{szIssueInvoiceDetails.zzstsgl,jdbcType=VARCHAR}, sysdate()
+            )
+        </foreach >
+    </insert >
+    <sql id="Base_Column_List" >
+         id, fpqqlsh, fphxz, spmc, ggxh, dw, spsl, dj, je, sl, se, spbm, zxbm, yhzcbs, lslbs,
+        zzstsgl, insert_time
+    </sql>
+    <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from sys_issue_invoice_details
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectByFpqqlsh" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from sys_issue_invoice_details
+        where fpqqlsh = #{fpqqlsh}
+    </select>
+
+    <!--查询发票明细-->
+    <select id="selInvoiceDetailInfosByParams" resultMap="BaseResultMap" parameterType="com.invoice.system.domain.szmodel.SysIssueInvoiceDetails" >
+        select
+        <include refid="Base_Column_List" />
+        from sys_issue_invoice_details
+        <where>
+
+            <if test="spmc != null and spmc != ''">
+                AND spmc like concat('%', #{spmc}, '%')
+            </if>
+            <if test="spbm != null and spbm != ''">
+                AND spbm = #{spbm}
+            </if>
+            fpqqlsh = #{fpqqlsh}
+        </where>
+
+    </select>
+
+
+</mapper>

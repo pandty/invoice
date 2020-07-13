@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.invoice.system.mapper.SysIssueInvoicePushMapper" >
+    <resultMap id="BaseResultMap" type="com.invoice.system.domain.szmodel.SysIssueInvoicePush" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="status" property="status" jdbcType="INTEGER" />
+        <result column="fpqqlsh" property="fpqqlsh" jdbcType="VARCHAR" />
+        <result column="shnsrsbh" property="shnsrsbh" jdbcType="VARCHAR" />
+        <result column="jsbh" property="jsbh" jdbcType="VARCHAR" />
+        <result column="fplxdm" property="fplxdm" jdbcType="VARCHAR" />
+        <result column="ghdwsbh" property="ghdwsbh" jdbcType="VARCHAR" />
+        <result column="kplx" property="kplx" jdbcType="INTEGER" />
+        <result column="yhlx" property="yhlx" jdbcType="INTEGER" />
+        <result column="ghdwmc" property="ghdwmc" jdbcType="VARCHAR" />
+        <result column="ghdwdzdh" property="ghdwdzdh" jdbcType="VARCHAR" />
+        <result column="ghdwyhzh" property="ghdwyhzh" jdbcType="VARCHAR" />
+        <result column="bz" property="bz" jdbcType="VARCHAR" />
+        <result column="skr" property="skr" jdbcType="VARCHAR" />
+        <result column="fhr" property="fhr" jdbcType="VARCHAR" />
+        <result column="kpr" property="kpr" jdbcType="VARCHAR" />
+        <result column="yfpdm" property="yfpdm" jdbcType="VARCHAR" />
+        <result column="yfphm" property="yfphm" jdbcType="VARCHAR" />
+        <result column="sprsjh" property="sprsjh" jdbcType="VARCHAR" />
+        <result column="invoice_number" property="invoiceNumber" jdbcType="VARCHAR" />
+        <result column="insert_time" property="insertTime" />
+        <result column="push_time" property="pushTime" />
+    </resultMap>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List" >
+        id, status, fpqqlsh, shnsrsbh, jsbh, fplxdm, ghdwsbh, kplx, yhlx, ghdwmc, ghdwdzdh, 
+        ghdwyhzh, bz, skr, fhr, kpr, yfpdm, yfphm, sprsjh, insert_time, invoice_number,push_time
+    </sql>
+    <select id="selectList" resultMap="BaseResultMap" parameterType="com.invoice.system.domain.szmodel.SysIssueInvoicePush" >
+        select
+        <include refid="Base_Column_List" />
+        from sys_issue_invoice_push
+        where fpqqlsh = #{fpqqlsh,jdbcType=VARCHAR}
+    </select>
+    <select id="selectByFpqqlsh" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from sys_issue_invoice_push
+        where fpqqlsh = #{fpqqlsh,jdbcType=VARCHAR}
+    </select>
+    <select id="selectByInvoiceNumber" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from sys_issue_invoice_push
+        where invoice_number = #{invoiceNumber,jdbcType=VARCHAR}
+    </select>
+    <select id="selectByStatus" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from sys_issue_invoice_push
+        where status = #{status,jdbcType=INTEGER}
+        limit 10
+
+    </select>
+
+
+    <insert id="insert" parameterType="com.invoice.system.domain.szmodel.SysIssueInvoicePush" >
+        insert into sys_issue_invoice_push (status, fpqqlsh,
+            shnsrsbh, jsbh, fplxdm, 
+            ghdwsbh, kplx, yhlx, 
+            ghdwmc, ghdwdzdh, ghdwyhzh, 
+            bz, skr, fhr, kpr, 
+            yfpdm, yfphm, sprsjh, 
+            invoice_number,insert_time)
+        values (#{status,jdbcType=INTEGER}, #{fpqqlsh,jdbcType=VARCHAR},
+            #{shnsrsbh,jdbcType=VARCHAR}, #{jsbh,jdbcType=VARCHAR}, #{fplxdm,jdbcType=VARCHAR}, 
+            #{ghdwsbh,jdbcType=VARCHAR}, #{kplx,jdbcType=INTEGER}, #{yhlx,jdbcType=INTEGER}, 
+            #{ghdwmc,jdbcType=VARCHAR}, #{ghdwdzdh,jdbcType=VARCHAR}, #{ghdwyhzh,jdbcType=VARCHAR}, 
+            #{bz,jdbcType=VARCHAR}, #{skr,jdbcType=VARCHAR}, #{fhr,jdbcType=VARCHAR}, #{kpr,jdbcType=VARCHAR}, 
+            #{yfpdm,jdbcType=VARCHAR}, #{yfphm,jdbcType=VARCHAR}, #{sprsjh,jdbcType=VARCHAR}, #{invoiceNumber,jdbcType=VARCHAR},
+            sysdate())
+    </insert>
+    <insert id="insertSelective" parameterType="com.invoice.system.domain.szmodel.SysIssueInvoicePush" >
+        insert into sys_issue_invoice_push
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="status != null" >
+                status,
+            </if>
+            <if test="fpqqlsh != null" >
+                fpqqlsh,
+            </if>
+            <if test="shnsrsbh != null" >
+                shnsrsbh,
+            </if>
+
+            <if test="jsbh != null" >
+
+                jsbh,
+            </if>
+            <if test="fplxdm != null" >
+                fplxdm,
+            </if>
+            <if test="ghdwsbh != null" >
+                ghdwsbh,
+            </if>
+            <if test="kplx != null" >
+                kplx,
+            </if>
+            <if test="yhlx != null" >
+                yhlx,
+            </if>
+            <if test="ghdwmc != null" >
+                ghdwmc,
+            </if>
+            <if test="ghdwdzdh != null" >
+                ghdwdzdh,
+            </if>
+            <if test="ghdwyhzh != null" >
+                ghdwyhzh,
+            </if>
+            <if test="bz != null" >
+                bz,
+            </if>
+            <if test="skr != null" >
+                skr,
+            </if>
+            <if test="fhr != null" >
+                fhr,
+            </if>
+            <if test="kpr != null" >
+                kpr,
+            </if>
+            <if test="yfpdm != null" >
+                yfpdm,
+            </if>
+            <if test="yfphm != null" >
+                yfphm,
+            </if>
+            <if test="sprsjh != null" >
+                sprsjh,
+            </if>
+            <if test="insertTime != null" >
+                insert_time,
+            </if>
+            <if test="pushTime != null" >
+                push_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="fpqqlsh != null" >
+                #{fpqqlsh,jdbcType=VARCHAR},
+            </if>
+            <if test="shnsrsbh != null" >
+                #{shnsrsbh,jdbcType=VARCHAR},
+            </if>
+            <if test="jsbh != null" >
+                #{jsbh,jdbcType=VARCHAR},
+            </if>
+            <if test="fplxdm != null" >
+                #{fplxdm,jdbcType=VARCHAR},
+            </if>
+            <if test="ghdwsbh != null" >
+                #{ghdwsbh,jdbcType=VARCHAR},
+            </if>
+            <if test="kplx != null" >
+                #{kplx,jdbcType=INTEGER},
+            </if>
+            <if test="yhlx != null" >
+                #{yhlx,jdbcType=INTEGER},
+            </if>
+            <if test="ghdwmc != null" >
+                #{ghdwmc,jdbcType=VARCHAR},
+            </if>
+            <if test="ghdwdzdh != null" >
+                #{ghdwdzdh,jdbcType=VARCHAR},
+            </if>
+            <if test="ghdwyhzh != null" >
+                #{ghdwyhzh,jdbcType=VARCHAR},
+            </if>
+            <if test="bz != null" >
+                #{bz,jdbcType=VARCHAR},
+            </if>
+            <if test="skr != null" >
+                #{skr,jdbcType=VARCHAR},
+            </if>
+            <if test="fhr != null" >
+                #{fhr,jdbcType=VARCHAR},
+            </if>
+            <if test="kpr != null" >
+                #{kpr,jdbcType=VARCHAR},
+            </if>
+            <if test="yfpdm != null" >
+                #{yfpdm,jdbcType=VARCHAR},
+            </if>
+            <if test="yfphm != null" >
+                #{yfphm,jdbcType=VARCHAR},
+            </if>
+            <if test="sprsjh != null" >
+                #{sprsjh,jdbcType=VARCHAR},
+            </if>
+            <if test="insertTime != null" >
+                #{insertTime,jdbcType=INTEGER},
+            </if>
+            <if test="pushTime != null" >
+                #{pushTime,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateStatus" parameterType="com.invoice.system.domain.szmodel.SysIssueInvoicePush" >
+        update sys_issue_invoice_push
+        set
+        status = #{status,jdbcType=INTEGER},
+        push_time=sysdate()
+        where  id = #{id} and fpqqlsh=#{fpqqlsh}
+    </update>
+
+    <update id="update" parameterType="map" >
+        update sys_issue_invoice_push
+        set id = #{record.id,jdbcType=INTEGER},
+            status = #{record.status,jdbcType=INTEGER},
+            fpqqlsh = #{record.fpqqlsh,jdbcType=VARCHAR},
+            shnsrsbh = #{record.shnsrsbh,jdbcType=VARCHAR},
+            jsbh = #{record.jsbh,jdbcType=VARCHAR},
+            fplxdm = #{record.fplxdm,jdbcType=VARCHAR},
+            ghdwsbh = #{record.ghdwsbh,jdbcType=VARCHAR},
+            kplx = #{record.kplx,jdbcType=INTEGER},
+            yhlx = #{record.yhlx,jdbcType=INTEGER},
+            ghdwmc = #{record.ghdwmc,jdbcType=VARCHAR},
+            ghdwdzdh = #{record.ghdwdzdh,jdbcType=VARCHAR},
+            ghdwyhzh = #{record.ghdwyhzh,jdbcType=VARCHAR},
+            bz = #{record.bz,jdbcType=VARCHAR},
+            skr = #{record.skr,jdbcType=VARCHAR},
+            fhr = #{record.fhr,jdbcType=VARCHAR},
+            kpr = #{record.kpr,jdbcType=VARCHAR},
+            yfpdm = #{record.yfpdm,jdbcType=VARCHAR},
+            yfphm = #{record.yfphm,jdbcType=VARCHAR},
+            sprsjh = #{record.sprsjh,jdbcType=VARCHAR},
+            insert_time = #{record.insertTime,jdbcType=INTEGER},
+            invoice_number#{record.invoiceNumber,jdbcType=INTEGER},
+            push_time = #{record.pushTime,jdbcType=INTEGER}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+    <sql id="MySqlPaginationSuffix" >
+        <if test="page != null" >
+            <![CDATA[ LIMIT #{page.pageSize} OFFSET #{page.recordIndex}]]>
+        </if>
+    </sql>
+</mapper>
