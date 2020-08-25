@@ -17,6 +17,6 @@ public class InvoiceApplication
         // System.setProperty("spring.devtools.restart.enabled", "false");
         SpringApplication.run(InvoiceApplication.class, args);
         System.out.println("(♥◠‿◠)ﾉﾞ  启动成功   ლ(´ڡ`ლ)ﾞ  " );
-        System.out.println("ok");
+        System.out.println("ok111");
     }
 }
